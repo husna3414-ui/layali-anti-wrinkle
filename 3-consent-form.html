@@ -104,6 +104,7 @@ info.lushlips@gmail.com
           <label class="opt"><input type="checkbox" name="Treatment requested" value="Masseter — jaw slimming / grinding" data-trigger="masseter"><span>Masseter — jaw slimming / teeth grinding</span></label>
           <label class="opt"><input type="checkbox" name="Treatment requested" value="Nefertiti lift — neck &amp; jawline" data-trigger="nefertiti"><span>Nefertiti lift — neck &amp; jawline</span></label>
           <label class="opt"><input type="checkbox" name="Treatment requested" value="Tinkerbell nose-tip lift" data-trigger="tinkerbell"><span>Tinkerbell nose-tip lift</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Pebbled / dimpled chin (mentalis)" data-trigger="mentalis"><span>Pebbled / dimpled chin (mentalis)</span></label>
           <label class="opt"><input type="checkbox" name="Treatment requested" value="Hyperhidrosis — underarms" data-trigger="hyperhidrosis"><span>Excess sweating — underarms</span></label>
           <label class="opt"><input type="checkbox" name="Treatment requested" value="Hyperhidrosis — palms" data-trigger="hyperhidrosis"><span>Excess sweating — palms</span></label>
           <label class="opt"><input type="checkbox" name="Treatment requested" value="Hyperhidrosis — feet" data-trigger="hyperhidrosis"><span>Excess sweating — feet</span></label>
@@ -236,7 +237,15 @@ info.lushlips@gmail.com
       <div class="sec-h"><span class="sec-n">6</span><h2 class="sec-t">Excess sweating screening</h2></div>
       <div class="sec-d">Shown because you selected a sweating (hyperhidrosis) treatment.</div>
       <div class="f"><label class="q">When did the excessive sweating begin? <span class="req">*</span></label><input type="text" name="Sweating onset" required></div>
-      <div class="f"><label class="q">Which areas are affected? <span class="req">*</span></label><input type="text" name="Sweating areas" required></div>
+      <div class="f"><label class="q">Which areas are affected? <span class="req">*</span><div class="hint">e.g. underarms, palms, soles of the feet, other.</div></label><input type="text" name="Sweating areas" required></div>
+      <!-- Primary (no cause) vs secondary (caused by another condition/medication)
+           — mirrors the classification the clinical Jotform records. -->
+      <div class="f" data-group><label class="q">Type of sweating <span class="req">*</span><div class="hint">Your practitioner will confirm this at your consultation.</div></label>
+        <div class="opts" data-min="1" data-single>
+          <label class="opt"><input type="checkbox" name="Hyperhidrosis type" value="Primary — sweating with no known underlying cause"><span><b>Primary</b> — long-standing sweating with no known underlying cause</span></label>
+          <label class="opt"><input type="checkbox" name="Hyperhidrosis type" value="Secondary — sweating linked to another condition or medication"><span><b>Secondary</b> — sweating linked to another condition or medication</span></label>
+          <label class="opt"><input type="checkbox" name="Hyperhidrosis type" value="Not sure"><span>Not sure</span></label>
+        </div><div class="err-msg">Please choose one.</div></div>
       <div class="f"><label class="q">Have you tried clinical-strength antiperspirants or other treatments?</label><textarea name="Sweating prior treatments" placeholder="Write 'No' or give details"></textarea></div>
       <div class="f" data-group><label class="q">Do you experience any of the following? <span class="req">*</span></label>
         <div class="opts grid-opts" data-min="1" data-none="None of these">
@@ -252,6 +261,13 @@ info.lushlips@gmail.com
           <label class="opt"><input type="checkbox" name="Sweating red flags" value="None of these"><span>None of these</span></label>
         </div><div class="err-msg">Please make a selection.</div></div>
       <p style="font-size:12.5px;color:var(--muted);margin:-2px 0 2px 2px">Some excess sweating has an underlying medical cause that should be investigated rather than treated. We may ask you to see your GP first.</p>
+      <!-- Minor's (starch-iodine) test: a harmless dye that turns dark
+           where you sweat, so the injection grid can be mapped accurately. -->
+      <div class="f" data-group><label class="q">Sweat-mapping (starch-iodine) test <span class="req">*</span></label>
+        <div class="opts" data-all>
+          <label class="opt"><input type="checkbox" name="Starch iodine test" value="I consent to a starch-iodine (Minor's) test being used to map the sweating area before treatment if my practitioner recommends it."><span>I consent to a <b>starch-iodine (Minor's) test</b> — a harmless dye that turns dark where I sweat — being used to <b>map the treatment area</b> if my practitioner recommends it.</span></label>
+          <label class="opt"><input type="checkbox" name="Starch iodine test" value="I confirm I have no known allergy to iodine."><span>I confirm I have <b>no known allergy to iodine</b> (please tell your practitioner if you are unsure).</span></label>
+        </div><div class="err-msg">Please confirm all to proceed.</div></div>
     </div>
 
     <!-- 6c · Nefertiti / neck screening -->
@@ -282,6 +298,24 @@ info.lushlips@gmail.com
           <label class="opt"><input type="checkbox" name="Nose screening" value="Difficulty breathing through the nose"><span>Difficulty breathing through the nose</span></label>
           <label class="opt"><input type="checkbox" name="Nose screening" value="Existing upper-lip or smile asymmetry"><span>Upper-lip / smile asymmetry</span></label>
           <label class="opt"><input type="checkbox" name="Nose screening" value="None of these"><span>None of these</span></label>
+        </div><div class="err-msg">Please make a selection.</div></div>
+    </div>
+
+    <!-- 6e · Pebbled / dimpled chin (mentalis) screening -->
+    <!-- Shown only when the pebbled-chin treatment is ticked. Screens for
+         chin/lip issues that make mentalis relaxation less predictable. -->
+    <div class="card" data-cond="mentalis">
+      <div class="sec-h"><span class="sec-n">6</span><h2 class="sec-t">Chin (pebbled / mentalis) screening</h2></div>
+      <div class="sec-d">Shown because you selected the pebbled / dimpled chin treatment. This softens the "orange-peel" dimpling caused by an overactive chin (mentalis) muscle.</div>
+      <div class="f" data-group><label class="q">Do you have any of the following? <span class="req">*</span></label>
+        <div class="opts grid-opts" data-min="1" data-none="None of these">
+          <label class="opt"><input type="checkbox" name="Chin screening" value="Previous chin surgery, implant, filler or threads"><span>Previous chin surgery / implant / filler / threads</span></label>
+          <label class="opt"><input type="checkbox" name="Chin screening" value="Significant chin or jaw trauma"><span>Significant chin / jaw trauma</span></label>
+          <label class="opt"><input type="checkbox" name="Chin screening" value="Existing lower-lip or smile asymmetry"><span>Lower-lip / smile asymmetry</span></label>
+          <label class="opt"><input type="checkbox" name="Chin screening" value="Difficulty controlling the lower lip when speaking, eating or drinking"><span>Difficulty controlling the lower lip</span></label>
+          <label class="opt"><input type="checkbox" name="Chin screening" value="Loose skin or hollowing over the chin"><span>Loose skin / hollowing over the chin</span></label>
+          <label class="opt"><input type="checkbox" name="Chin screening" value="Speech or pronunciation difficulties"><span>Speech / pronunciation difficulties</span></label>
+          <label class="opt"><input type="checkbox" name="Chin screening" value="None of these"><span>None of these</span></label>
         </div><div class="err-msg">Please make a selection.</div></div>
     </div>
 
@@ -367,16 +401,18 @@ info.lushlips@gmail.com
       <div class="f" data-group><div class="opts" data-all>
         <label class="opt"><input type="checkbox" name="Masseter risk acknowledgement" value="I understand and accept the specific risks of masseter treatment."><span>I understand and <b>accept the specific risks</b> of masseter treatment.</span></label>
         <label class="opt"><input type="checkbox" name="Masseter dental acknowledgement" value="I understand this does not replace dental investigation of an underlying bite, tooth or jaw-joint problem."><span>I understand this does <b>not replace dental investigation</b> of an underlying bite, tooth or jaw-joint problem.</span></label>
+        <label class="opt"><input type="checkbox" name="Masseter therapeutic acknowledgement" value="Where treatment is intended to help teeth grinding (bruxism), TMJ/jaw-joint dysfunction, jaw tension or associated headaches/migraines, I understand any improvement in these symptoms cannot be guaranteed."><span>Where treatment is aimed at <b>teeth grinding (bruxism), TMJ / jaw-joint dysfunction, jaw tension or associated headaches / migraines</b>, I understand improvement in these symptoms <b>cannot be guaranteed</b>.</span></label>
       </div><div class="err-msg">Please confirm all to proceed.</div></div>
     </div>
 
     <!-- 10c · Hyperhidrosis specific risks -->
     <div class="card" data-cond="hyperhidrosis">
       <div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Excess sweating treatment — specific risks</h2></div>
-      <p class="prose" style="margin-top:0">Possible effects include pain from multiple injections, bruising/swelling/irritation, incomplete or uneven reduction in sweating, dryness or irritation, altered skin odour, increased sweating in untreated areas, temporary weakness of the hand/arm/foot (where treated), temporary difficulty gripping or fine movement after palm treatment, reduced response to later treatments, and continued sweating caused by an underlying condition.</p>
-      <div class="f" data-group><div class="opts" data-min="1" data-single>
+      <p class="prose" style="margin-top:0">Possible effects include pain from multiple injections, bruising/swelling/irritation, incomplete or uneven reduction in sweating, dryness or irritation, altered skin odour, <b>compensatory sweating</b> (increased sweating in untreated areas of the body), temporary weakness of the hand/arm/foot (where treated), temporary difficulty gripping or fine hand movement after palm treatment, reduced response to later treatments, and continued sweating caused by an underlying condition. Results are temporary and typically last around 4–12 months before re-treatment is needed.</p>
+      <div class="f" data-group><div class="opts" data-all>
         <label class="opt"><input type="checkbox" name="Hyperhidrosis risk acknowledgement" value="I understand and accept the specific risks of excess-sweating treatment."><span>I understand and <b>accept the specific risks</b> of excess-sweating treatment.</span></label>
-      </div><div class="err-msg">Please confirm to continue.</div></div>
+        <label class="opt"><input type="checkbox" name="Hyperhidrosis compensatory acknowledgement" value="I understand I may sweat more in other, untreated areas of my body (compensatory sweating)."><span>I understand I may sweat more in <b>other, untreated areas</b> of my body (compensatory sweating).</span></label>
+      </div><div class="err-msg">Please confirm all to proceed.</div></div>
     </div>
 
     <!-- 10d · Nefertiti specific risks -->
@@ -395,6 +431,17 @@ info.lushlips@gmail.com
       <div class="f" data-group><div class="opts" data-all>
         <label class="opt"><input type="checkbox" name="Tinkerbell risk acknowledgement" value="I understand and accept the specific risks of nasal-tip treatment."><span>I understand and <b>accept the specific risks</b> of nasal-tip treatment.</span></label>
         <label class="opt"><input type="checkbox" name="Tinkerbell structural acknowledgement" value="I understand this cannot correct structural breathing problems or concerns needing surgical assessment."><span>I understand this <b>cannot correct structural breathing problems</b> or concerns needing surgical assessment.</span></label>
+      </div><div class="err-msg">Please confirm all to proceed.</div></div>
+    </div>
+
+    <!-- 10f · Pebbled / dimpled chin (mentalis) specific risks -->
+    <!-- Shown only when the pebbled-chin treatment is ticked. -->
+    <div class="card" data-cond="mentalis">
+      <div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Pebbled chin — specific risks</h2></div>
+      <p class="prose" style="margin-top:0">Possible effects include limited or no visible improvement, uneven or asymmetrical chin appearance, chin flattening or hollowing, changes to lower-lip movement or position, a "heavy" or drooping lower lip, difficulty controlling the lower lip when speaking, eating or drinking, temporary speech or pronunciation changes, smile asymmetry, temporary weakness of nearby muscles, and results lasting only 3–6 months. Deeper creases, loose skin and bone/fat structure may not be corrected by this treatment alone.</p>
+      <div class="f" data-group><div class="opts" data-all>
+        <label class="opt"><input type="checkbox" name="Chin risk acknowledgement" value="I understand and accept the specific risks of pebbled-chin (mentalis) treatment."><span>I understand and <b>accept the specific risks</b> of pebbled-chin (mentalis) treatment.</span></label>
+        <label class="opt"><input type="checkbox" name="Chin lip acknowledgement" value="I understand my lower-lip movement or speech may be temporarily affected and this must wear off on its own."><span>I understand my <b>lower-lip movement or speech may be temporarily affected</b>, and that this must wear off on its own.</span></label>
       </div><div class="err-msg">Please confirm all to proceed.</div></div>
     </div>
 
