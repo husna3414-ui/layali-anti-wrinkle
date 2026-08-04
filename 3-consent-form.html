@@ -1,240 +1,472 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     STAGE 3 — BOTULINUM TOXIN TYPE A CONSENT FORM (Anti-Wrinkle)
+     Comprehensive, multi-treatment consent for: 3-area upper face,
+     masseter, Nefertiti lift, Tinkerbell nose, and hyperhidrosis.
+
+     HOW THE CONDITIONAL SECTIONS WORK (plain English):
+       The treatment-specific SCREENING and RISK cards are tagged
+       with data-cond="masseter" (etc). The little script at the
+       bottom of this page watches which treatments the client ticks
+       in Section 2 and ADDS or REMOVES those cards from the page.
+       Because they're physically removed when not selected, the
+       shared engine (pack.js) never validates them, never shows them,
+       and never puts them in the signed PDF — the client only ever
+       sees and signs the sections relevant to THEIR treatment.
+       Nothing in the shared pack.js was changed.
+
+     Clinical wording cross-checked against: BOTOX SmPC (emc/859),
+     GMC cosmetic-interventions guidance, and MHRA/UKHSA safety advice.
+     The prescriber/product/units record is the separate STAFF
+     Treatment Record (Stage 5), kept off this public form.
+     ============================================================ -->
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anti-Wrinkle Injections — Consultation &amp; Consent | Layali Clinic</title>
+<title>Anti-Wrinkle Injections — Consent Form | Layali Clinic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<!-- jsPDF: builds the signed PDF copy of this consent on submit -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head><body>
 <div class="wrap">
+  <!-- ===== Header / branding ===== -->
   <header class="hero">
     <img class="logo" src="logo.jpg" alt="Layali Clinic">
-    <span class="kicker">Anti-Wrinkle Injections · Consultation &amp; Consent</span>
-    <h1>Consultation &amp; Consent Form</h1>
-    <p class="sub">Please read every section carefully. Your signature confirms you understand and agree to all of it.</p>
+    <span class="kicker">Anti-Wrinkle Injections · Consent</span>
+    <h1>Botulinum Toxin Consent Form</h1>
+    <p class="sub">Please read every section carefully. This form is completed alongside a full consultation. Your signature confirms you understand and agree to everything below. <b>Tick your treatment in Section 2 first</b> — the form will then show the sections that apply to you.</p>
   </header>
 
-  <form data-pack-form="Anti-Wrinkle Consent" data-pdf-title="Anti-Wrinkle Injections Consultation &amp; Consent" data-autoresponse="Thank you for completing your anti-wrinkle consultation and consent form with Layali Clinic. We've received it and saved a copy to your record. If anything about your health changes before your appointment, please call us on 07787 708200. — Layali Clinic" novalidate>
+  <form data-pack-form="Anti-Wrinkle Consent" data-pdf-title="Botulinum Toxin Type A — Consent Form" data-autoresponse="Thank you for completing your consent form for Anti-Wrinkle Injections with Layali Clinic.
 
-    <!-- PATIENT DETAILS -->
+We have received your consent form and saved a copy to your record.
+
+Before your appointment, please READ THE PRE-CARE guide so you are fully prepared, and after your treatment please KEEP THE AFTERCARE guide to hand so you can follow it during your recovery.
+
+Your treatment guides:
+Treatment guide: https://husna3414-ui.github.io/layali-anti-wrinkle/1-treatment-guide.html
+Pre-care guide (read before your appointment): https://husna3414-ui.github.io/layali-anti-wrinkle/4-pre-care-guide.html
+Aftercare guide (keep for after your treatment): https://husna3414-ui.github.io/layali-anti-wrinkle/6-aftercare-guide.html
+
+If your medical history, medication, general health or pregnancy status changes in any way before your appointment, please contact the clinic so we can review your suitability before you attend.
+
+Layali Clinic
+07787 708200
+info.lushlips@gmail.com
+442 Lea Bridge Road, Leyton, London E10 7DT
+
+— Layali Clinic" novalidate>
+
+    <!-- A short medico-legal note shown at the top of the form -->
+    <div class="notice" style="margin-bottom:22px">Botulinum toxin is a <b>prescription-only medicine</b> and must be prescribed for you individually. Cosmetic botulinum toxin treatment for anyone under 18 is prohibited in England.</div>
+
+    <!-- ============================================================
+         1. CLIENT DETAILS
+         ============================================================ -->
     <div class="card">
-      <div class="sec-h"><span class="sec-n">1</span><h2 class="sec-t">Patient details</h2></div>
+      <div class="sec-h"><span class="sec-n">1</span><h2 class="sec-t">Your details</h2></div>
       <div class="f"><label class="q">Full name <span class="req">*</span></label><input type="text" name="Full name" required></div>
       <div class="row">
         <div class="f"><label class="q">Date of birth <span class="req">*</span></label><input type="date" name="Date of birth" required></div>
         <div class="f"><label class="q">Mobile number <span class="req">*</span></label><input type="tel" name="Mobile number" required></div>
       </div>
       <div class="f"><label class="q">Email <span class="req">*</span><div class="hint">Your confirmation copy is sent here.</div></label><input type="email" name="Email" required></div>
-      <div class="f"><label class="q">Address <span class="req">*</span></label><input type="text" name="Address" required></div>
+      <div class="f"><label class="q">Address <span class="req">*</span></label>
+        <input type="text" name="Address line 1" placeholder="House &amp; street" required style="margin-bottom:10px">
+        <div class="row"><input type="text" name="City / Town" placeholder="City / town" required><input type="text" name="Postcode" placeholder="Postcode" required></div></div>
+      <div class="f"><label class="q">Occupation</label><input type="text" name="Occupation"></div>
       <div class="row">
         <div class="f"><label class="q">Emergency contact name <span class="req">*</span></label><input type="text" name="Emergency contact name" required></div>
         <div class="f"><label class="q">Emergency contact number <span class="req">*</span></label><input type="tel" name="Emergency contact number" required></div>
       </div>
-      <div class="row">
-        <div class="f"><label class="q">Date of consultation <span class="req">*</span></label><input type="date" name="Date of consultation" required></div>
-        <div class="f"><label class="q">Date of treatment <span class="req">*</span></label><input type="date" name="Date of treatment" required></div>
-      </div>
-      <div class="f"><label class="q">Practitioner <span class="req">*</span></label><input type="text" name="Practitioner" value="Husna Panjabi" required></div>
-    </div>
-
-    <!-- TREATMENT AREAS -->
-    <div class="card">
-      <div class="sec-h"><span class="sec-n">2</span><h2 class="sec-t">Treatment areas requested</h2></div>
-      <div class="f" data-group><label class="q">Please select all areas you wish to discuss or treat today <span class="req">*</span></label>
-        <div class="opts grid-opts" data-min="1">
-          <label class="opt"><input type="checkbox" name="Treatment areas" value="Forehead lines"><span>Forehead lines</span></label>
-          <label class="opt"><input type="checkbox" name="Treatment areas" value="Frown lines (Glabella)"><span>Frown lines (Glabella)</span></label>
-          <label class="opt"><input type="checkbox" name="Treatment areas" value="Crow's feet"><span>Crow's feet</span></label>
-          <label class="opt"><input type="checkbox" name="Treatment areas" value="Masseter / jaw slimming"><span>Masseter / jaw slimming</span></label>
-          <label class="opt"><input type="checkbox" name="Treatment areas" value="Bruxism / teeth grinding"><span>Bruxism / teeth grinding</span></label>
-          <label class="opt"><input type="checkbox" name="Treatment areas" value="Nefertiti lift (neck & jawline)"><span>Nefertiti lift (neck &amp; jawline)</span></label>
-          <label class="opt"><input type="checkbox" name="Treatment areas" value="Hyperhidrosis (excess sweating)"><span>Hyperhidrosis (excess sweating)</span></label>
-          <label class="opt"><input type="checkbox" name="Treatment areas" value="Other"><span>Other</span></label>
-        </div><div class="err-msg">Please select at least one area.</div></div>
-      <div class="f"><label class="q">If "Other", please specify</label><input type="text" name="Other area details"></div>
-    </div>
-
-    <!-- MEDICAL HISTORY -->
-    <div class="card">
-      <div class="sec-h"><span class="sec-n">3</span><h2 class="sec-t">Medical history</h2></div>
-      <div class="f" data-group><label class="q">Do you currently have, or have you ever had, any of the following? <span class="req">*</span><div class="hint">Tick all that apply.</div></label>
-        <div class="opts grid-opts" data-min="1" data-none="None of the above">
-          <label class="opt"><input type="checkbox" name="Medical history" value="Pregnancy"><span>Pregnancy</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Breastfeeding"><span>Breastfeeding</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Myasthenia Gravis"><span>Myasthenia Gravis</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Lambert-Eaton Syndrome"><span>Lambert-Eaton Syndrome</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Multiple Sclerosis"><span>Multiple Sclerosis</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Motor Neurone Disease"><span>Motor Neurone Disease</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Parkinson's Disease"><span>Parkinson's Disease</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Bell's Palsy"><span>Bell's Palsy</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Facial Nerve Disorder"><span>Facial Nerve Disorder</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Epilepsy"><span>Epilepsy</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Autoimmune Disease"><span>Autoimmune Disease</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Diabetes"><span>Diabetes</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Heart Disease"><span>Heart Disease</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="High Blood Pressure"><span>High Blood Pressure</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Cancer"><span>Cancer</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Blood Clotting Disorder"><span>Blood Clotting Disorder</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Keloid Scarring"><span>Keloid Scarring</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Previous adverse reaction to Botulinum Toxin"><span>Previous adverse reaction to Botulinum Toxin</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="Previous adverse reaction to Dermal Fillers"><span>Previous adverse reaction to Dermal Fillers</span></label>
-          <label class="opt"><input type="checkbox" name="Medical history" value="None of the above"><span>None of the above</span></label>
-        </div><div class="err-msg">Please make a selection (choose “None of the above” if none apply).</div></div>
-    </div>
-
-    <!-- MEDICATION -->
-    <div class="card">
-      <div class="sec-h"><span class="sec-n">4</span><h2 class="sec-t">Medication screening</h2></div>
-      <div class="f" data-group><label class="q">Are you currently taking any of the following? <span class="req">*</span></label>
-        <div class="opts grid-opts" data-min="1" data-none="No medication">
-          <label class="opt"><input type="checkbox" name="Medication" value="Antibiotics"><span>Antibiotics</span></label>
-          <label class="opt"><input type="checkbox" name="Medication" value="Blood thinners"><span>Blood thinners</span></label>
-          <label class="opt"><input type="checkbox" name="Medication" value="Aspirin"><span>Aspirin</span></label>
-          <label class="opt"><input type="checkbox" name="Medication" value="Anti-inflammatory medication"><span>Anti-inflammatory medication</span></label>
-          <label class="opt"><input type="checkbox" name="Medication" value="Steroids"><span>Steroids</span></label>
-          <label class="opt"><input type="checkbox" name="Medication" value="Immunosuppressants"><span>Immunosuppressants</span></label>
-          <label class="opt"><input type="checkbox" name="Medication" value="Acne medication"><span>Acne medication</span></label>
-          <label class="opt"><input type="checkbox" name="Medication" value="Weight loss medication"><span>Weight loss medication</span></label>
-          <label class="opt"><input type="checkbox" name="Medication" value="Other prescription medication"><span>Other prescription medication</span></label>
-          <label class="opt"><input type="checkbox" name="Medication" value="No medication"><span>No medication</span></label>
-        </div><div class="err-msg">Please make a selection.</div></div>
-      <div class="f"><label class="q">Please provide details</label><textarea name="Medication details"></textarea></div>
-    </div>
-
-    <!-- PREVIOUS TREATMENT -->
-    <div class="card">
-      <div class="sec-h"><span class="sec-n">5</span><h2 class="sec-t">Previous treatment history</h2></div>
-      <div class="f" data-group><label class="q">Have you previously had anti-wrinkle injections? <span class="req">*</span></label>
+      <div class="f"><label class="q">GP name &amp; surgery</label><input type="text" name="GP name and surgery"></div>
+      <div class="f" data-group><label class="q">Age confirmation <span class="req">*</span></label>
         <div class="opts" data-min="1" data-single>
-          <label class="opt"><input type="checkbox" name="Had anti-wrinkle before" value="Yes"><span>Yes</span></label>
-          <label class="opt"><input type="checkbox" name="Had anti-wrinkle before" value="No"><span>No</span></label>
+          <label class="opt"><input type="checkbox" name="Age confirmation" value="I confirm I am aged 18 or over"><span>I confirm that I am aged <b>18 or over</b>.</span></label>
+        </div><div class="err-msg">We can only treat clients aged 18 or over.</div></div>
+    </div>
+
+    <!-- ============================================================
+         2. TREATMENT REQUESTED  ← drives the conditional sections
+         Each option carries data-trigger="<key>". The script reads
+         these to decide which screening/risk cards to show.
+         ============================================================ -->
+    <div class="card">
+      <div class="sec-h"><span class="sec-n">2</span><h2 class="sec-t">Treatment requested</h2></div>
+      <div class="sec-d">Select every treatment you are considering today. The relevant screening and risk sections will appear below.</div>
+      <div class="f" data-group><label class="q">Treatment(s) requested <span class="req">*</span></label>
+        <div class="opts grid-opts" data-min="1">
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Three-area upper face (frown + forehead + crow's feet)" data-trigger="upperface"><span>Three-area upper face (frown&nbsp;+&nbsp;forehead&nbsp;+&nbsp;crow's feet)</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Frown lines (glabella) only" data-trigger="upperface"><span>Frown lines (glabella) only</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Forehead lines only" data-trigger="upperface"><span>Forehead lines only</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Crow's feet only" data-trigger="upperface"><span>Crow's feet only</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Masseter — jaw slimming / grinding" data-trigger="masseter"><span>Masseter — jaw slimming / teeth grinding</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Nefertiti lift — neck &amp; jawline" data-trigger="nefertiti"><span>Nefertiti lift — neck &amp; jawline</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Tinkerbell nose-tip lift" data-trigger="tinkerbell"><span>Tinkerbell nose-tip lift</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Hyperhidrosis — underarms" data-trigger="hyperhidrosis"><span>Excess sweating — underarms</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Hyperhidrosis — palms" data-trigger="hyperhidrosis"><span>Excess sweating — palms</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Hyperhidrosis — feet" data-trigger="hyperhidrosis"><span>Excess sweating — feet</span></label>
+          <label class="opt"><input type="checkbox" name="Treatment requested" value="Hyperhidrosis — other area" data-trigger="hyperhidrosis"><span>Excess sweating — other area</span></label>
+        </div><div class="err-msg">Please select at least one treatment.</div></div>
+      <div class="f"><label class="q">If you selected an "other" area, please specify</label><input type="text" name="Other area details"></div>
+      <div class="f"><label class="q">Your main concern <span class="req">*</span></label><textarea name="Main concern" required></textarea></div>
+      <div class="f"><label class="q">What result are you hoping to achieve? <span class="req">*</span></label><textarea name="Desired result" required></textarea></div>
+    </div>
+
+    <!-- ============================================================
+         3. PREVIOUS BOTULINUM TOXIN TREATMENT
+         ============================================================ -->
+    <div class="card">
+      <div class="sec-h"><span class="sec-n">3</span><h2 class="sec-t">Previous botulinum toxin treatment</h2></div>
+      <div class="f" data-group><label class="q">Have you previously received botulinum toxin (anti-wrinkle) injections? <span class="req">*</span></label>
+        <div class="opts" data-min="1" data-single>
+          <label class="opt"><input type="checkbox" name="Had toxin before" value="No"><span>No</span></label>
+          <label class="opt"><input type="checkbox" name="Had toxin before" value="Yes"><span>Yes</span></label>
         </div><div class="err-msg">Please select Yes or No.</div></div>
       <div class="row">
-        <div class="f"><label class="q">If yes — date of last treatment</label><input type="text" name="Date of last treatment"></div>
-        <div class="f"><label class="q">Brand used (if known)</label><input type="text" name="Previous brand used"></div>
+        <div class="f"><label class="q">If yes — date of most recent treatment</label><input type="text" name="Date of last treatment" placeholder="e.g. March 2026"></div>
+        <div class="f"><label class="q">Areas treated</label><input type="text" name="Previous areas treated"></div>
       </div>
-      <div class="f"><label class="q">Any complications?</label><textarea name="Previous complications"></textarea></div>
+      <div class="row">
+        <div class="f"><label class="q">Product / brand used (if known)</label><input type="text" name="Previous brand"></div>
+        <div class="f"><label class="q">Approx. units (if known)</label><input type="text" name="Previous units"></div>
+      </div>
+      <div class="f"><label class="q">Previous clinic or practitioner</label><input type="text" name="Previous clinic"></div>
+      <div class="f"><label class="q">Did you have any complications, unexpected results or prolonged weakness?</label><textarea name="Previous complications" placeholder="Write 'None' if not applicable"></textarea></div>
+      <div class="f" data-group><label class="q">Have you had ANY botulinum toxin in the last 3 months? <span class="req">*</span><div class="hint">Re-treating too soon increases certain risks.</div></label>
+        <div class="opts" data-min="1" data-single>
+          <label class="opt"><input type="checkbox" name="Toxin within 3 months" value="No"><span>No</span></label>
+          <label class="opt"><input type="checkbox" name="Toxin within 3 months" value="Yes"><span>Yes</span></label>
+        </div><div class="err-msg">Please select Yes or No.</div></div>
+      <div class="f"><label class="q">If yes — date &amp; areas</label><input type="text" name="Recent toxin details"></div>
     </div>
 
-    <!-- UNDERSTANDING -->
-    <div class="card prose">
-      <div class="sec-h"><span class="sec-n">6</span><h2 class="sec-t">Understanding anti-wrinkle injections</h2></div>
-      <p>Anti-wrinkle injections use <b>Botulinum Toxin Type A</b> to temporarily relax targeted muscles. The treatment works by reducing muscle movement, helping to soften existing lines and prevent deeper wrinkle formation.</p>
-      <p>Common treatment areas include: forehead lines, frown lines (glabella), crow's feet, masseter (jaw slimming), bruxism (teeth grinding), Nefertiti lift (neck &amp; jawline) and hyperhidrosis (excess sweating).</p>
-      <ul>
-        <li>Results usually begin to appear within <b>2–10 days</b>.</li>
-        <li>Full results are generally visible after approximately <b>14 days</b>.</li>
-        <li>Results typically last around <b>3–4 months</b> but vary between individuals.</li>
-      </ul>
-    </div>
-
-    <!-- REALISTIC EXPECTATIONS -->
+    <!-- ============================================================
+         4. MEDICAL SCREENING (general health)
+         Yes/No table converted to a "tick all that apply" checklist.
+         Anything left un-ticked = does not apply.
+         ============================================================ -->
     <div class="card">
-      <div class="sec-h"><span class="sec-n">7</span><h2 class="sec-t">Realistic expectations</h2></div>
-      <div class="f" data-group><label class="q">Please confirm you understand all of the following <span class="req">*</span></label>
-        <div class="opts" data-all>
-          <label class="opt"><input type="checkbox" name="Expectations" value="Results vary between individuals."><span>Results vary between individuals.</span></label>
-          <label class="opt"><input type="checkbox" name="Expectations" value="Results cannot be guaranteed."><span>Results cannot be guaranteed.</span></label>
-          <label class="opt"><input type="checkbox" name="Expectations" value="Anti-wrinkle injections improve but may not completely remove lines."><span>Anti-wrinkle injections improve but may not completely remove lines.</span></label>
-          <label class="opt"><input type="checkbox" name="Expectations" value="Existing asymmetry may remain."><span>Existing asymmetry may remain.</span></label>
-          <label class="opt"><input type="checkbox" name="Expectations" value="Additional treatments may be required."><span>Additional treatments may be required.</span></label>
-          <label class="opt"><input type="checkbox" name="Expectations" value="Results are temporary."><span>Results are temporary.</span></label>
-          <label class="opt"><input type="checkbox" name="Expectations" value="Maintenance treatments are required to maintain results."><span>Maintenance treatments are required to maintain results.</span></label>
-          <label class="opt"><input type="checkbox" name="Expectations" value="The treatment will not stop the natural ageing process."><span>The treatment will not stop the natural ageing process.</span></label>
-        </div><div class="err-msg">Please confirm all to proceed.</div></div>
+      <div class="sec-h"><span class="sec-n">4</span><h2 class="sec-t">Medical screening</h2></div>
+      <div class="sec-d">Please be honest and thorough — this keeps your treatment safe. Tick anything you have now or have had. If none apply, tick the last box.</div>
+      <div class="f" data-group><label class="q">Do you have, or have you ever had, any of the following? <span class="req">*</span></label>
+        <div class="opts grid-opts" data-min="1" data-none="None of the above apply to me">
+          <label class="opt"><input type="checkbox" name="Medical history" value="Allergy or previous reaction to botulinum toxin"><span>Allergy / previous reaction to botulinum toxin</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Allergy to human albumin or any injectable ingredient"><span>Allergy to human albumin or any injectable ingredient</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Infection, rash, acne, cold sore or broken skin near the area"><span>Infection / cold sore / broken skin near the area</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Fever, infection or current illness"><span>Fever / current illness</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Myasthenia Gravis, Lambert-Eaton or neuromuscular condition"><span>Myasthenia Gravis / Lambert-Eaton / neuromuscular condition</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Motor neurone disease, peripheral neuropathy or neurological condition"><span>Motor neurone disease / neuropathy / neurological condition</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Facial palsy, Bell's palsy or unexplained facial weakness"><span>Facial / Bell's palsy or facial weakness</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Difficulty swallowing, choking or aspiration"><span>Difficulty swallowing / choking</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Speech difficulties or unexplained voice changes"><span>Speech / voice difficulties</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Breathing difficulties or significant respiratory disease"><span>Breathing difficulties / respiratory disease</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="A bleeding or clotting disorder"><span>Bleeding / clotting disorder</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Unexplained or excessive bruising"><span>Unexplained / excessive bruising</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Epilepsy, seizures or fainting episodes"><span>Epilepsy / seizures / fainting</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Significant heart or circulation problems"><span>Heart / circulation problems</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="An autoimmune condition"><span>Autoimmune condition</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Immune system disorder or immunosuppressive treatment"><span>Immune disorder / immunosuppressive treatment</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Previous surgery, trauma or permanent implants in the area"><span>Surgery / trauma / implants in the area</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Current dental infection or recent major dental treatment"><span>Dental infection / recent major dental treatment</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="Body dysmorphic disorder or appearance concerns affecting wellbeing"><span>Appearance concerns significantly affecting my wellbeing</span></label>
+          <label class="opt"><input type="checkbox" name="Medical history" value="None of the above apply to me"><span>None of the above apply to me</span></label>
+        </div><div class="err-msg">Please make a selection (tick the last box if none apply).</div></div>
+
+      <div class="f" data-group><label class="q">Pregnancy &amp; breastfeeding <span class="req">*</span><div class="hint">Treatment is not recommended during pregnancy or breastfeeding. Tick any that apply.</div></label>
+        <div class="opts grid-opts" data-min="1" data-none="None of these apply to me">
+          <label class="opt"><input type="checkbox" name="Pregnancy status" value="Pregnant or possibly pregnant"><span>Pregnant or possibly pregnant</span></label>
+          <label class="opt"><input type="checkbox" name="Pregnancy status" value="Trying to become pregnant"><span>Trying to become pregnant</span></label>
+          <label class="opt"><input type="checkbox" name="Pregnancy status" value="Breastfeeding"><span>Breastfeeding</span></label>
+          <label class="opt"><input type="checkbox" name="Pregnancy status" value="None of these apply to me"><span>None of these apply to me</span></label>
+        </div><div class="err-msg">Please make a selection.</div></div>
     </div>
 
-    <!-- RISKS -->
+    <!-- ============================================================
+         5. MEDICATIONS & ALLERGIES
+         ============================================================ -->
+    <div class="card">
+      <div class="sec-h"><span class="sec-n">5</span><h2 class="sec-t">Medications &amp; allergies</h2></div>
+      <div class="f" data-group><label class="q">Are you taking, or have you recently taken, any of the following? <span class="req">*</span></label>
+        <div class="opts grid-opts" data-min="1" data-none="None of these">
+          <label class="opt"><input type="checkbox" name="Medication screening" value="Blood thinners (warfarin, apixaban, rivaroxaban, clopidogrel)"><span>Blood thinners (warfarin, apixaban, rivaroxaban, clopidogrel)</span></label>
+          <label class="opt"><input type="checkbox" name="Medication screening" value="Aspirin or anti-inflammatory medication"><span>Aspirin / anti-inflammatory medication</span></label>
+          <label class="opt"><input type="checkbox" name="Medication screening" value="Antibiotics (incl. aminoglycosides) for a current infection"><span>Antibiotics for a current infection</span></label>
+          <label class="opt"><input type="checkbox" name="Medication screening" value="Muscle relaxants"><span>Muscle relaxants</span></label>
+          <label class="opt"><input type="checkbox" name="Medication screening" value="Medication affecting nerves or muscle function"><span>Medication affecting nerves / muscles</span></label>
+          <label class="opt"><input type="checkbox" name="Medication screening" value="Medication affecting sweating"><span>Medication affecting sweating</span></label>
+          <label class="opt"><input type="checkbox" name="Medication screening" value="Herbal medicines or supplements that may increase bruising"><span>Herbal / supplements that may increase bruising</span></label>
+          <label class="opt"><input type="checkbox" name="Medication screening" value="None of these"><span>None of these</span></label>
+        </div><div class="err-msg">Please make a selection.</div></div>
+      <div class="f"><label class="q">Please list ALL medicines, vitamins &amp; supplements you take <span class="req">*</span><div class="hint">Write "None" if none.</div></label><textarea name="All medications" required></textarea></div>
+      <div class="f"><label class="q">Please list ALL known allergies <span class="req">*</span><div class="hint">Write "None" if none.</div></label><textarea name="All allergies" required></textarea></div>
+      <p style="font-size:12.5px;color:var(--muted);margin:-4px 0 2px 2px">Please do not stop any prescribed medication unless told to by the clinician who prescribed it.</p>
+    </div>
+
+    <!-- ============================================================
+         6. TREATMENT-SPECIFIC SCREENING  (CONDITIONAL)
+         These cards appear only when the matching treatment is ticked.
+         ============================================================ -->
+
+    <!-- 6a · Masseter screening -->
+    <div class="card" data-cond="masseter">
+      <div class="sec-h"><span class="sec-n">6</span><h2 class="sec-t">Masseter screening</h2></div>
+      <div class="sec-d">Shown because you selected masseter / jaw treatment.</div>
+      <div class="f" data-group><label class="q">Do you experience any of the following? <span class="req">*</span></label>
+        <div class="opts grid-opts" data-min="1" data-none="None of these">
+          <label class="opt"><input type="checkbox" name="Masseter screening" value="Teeth grinding or clenching"><span>Teeth grinding / clenching</span></label>
+          <label class="opt"><input type="checkbox" name="Masseter screening" value="Jaw pain or TMJ problems"><span>Jaw pain / TMJ problems</span></label>
+          <label class="opt"><input type="checkbox" name="Masseter screening" value="Clicking, locking or restricted jaw movement"><span>Clicking / locking / restricted jaw</span></label>
+          <label class="opt"><input type="checkbox" name="Masseter screening" value="Difficulty chewing or swallowing"><span>Difficulty chewing / swallowing</span></label>
+          <label class="opt"><input type="checkbox" name="Masseter screening" value="Significant dental problems or uneven bite"><span>Dental problems / uneven bite</span></label>
+          <label class="opt"><input type="checkbox" name="Masseter screening" value="Existing jowling or lower-face laxity"><span>Existing jowling / lower-face laxity</span></label>
+          <label class="opt"><input type="checkbox" name="Masseter screening" value="None of these"><span>None of these</span></label>
+        </div><div class="err-msg">Please make a selection.</div></div>
+      <div class="f" data-group><label class="q">Have you been assessed by a dentist for grinding, pain or bite problems? <span class="req">*</span></label>
+        <div class="opts" data-min="1" data-single>
+          <label class="opt"><input type="checkbox" name="Dentist assessed" value="Yes"><span>Yes</span></label>
+          <label class="opt"><input type="checkbox" name="Dentist assessed" value="No"><span>No</span></label>
+          <label class="opt"><input type="checkbox" name="Dentist assessed" value="Not applicable"><span>Not applicable</span></label>
+        </div><div class="err-msg">Please choose one.</div></div>
+    </div>
+
+    <!-- 6b · Hyperhidrosis screening -->
+    <div class="card" data-cond="hyperhidrosis">
+      <div class="sec-h"><span class="sec-n">6</span><h2 class="sec-t">Excess sweating screening</h2></div>
+      <div class="sec-d">Shown because you selected a sweating (hyperhidrosis) treatment.</div>
+      <div class="f"><label class="q">When did the excessive sweating begin? <span class="req">*</span></label><input type="text" name="Sweating onset" required></div>
+      <div class="f"><label class="q">Which areas are affected? <span class="req">*</span></label><input type="text" name="Sweating areas" required></div>
+      <div class="f"><label class="q">Have you tried clinical-strength antiperspirants or other treatments?</label><textarea name="Sweating prior treatments" placeholder="Write 'No' or give details"></textarea></div>
+      <div class="f" data-group><label class="q">Do you experience any of the following? <span class="req">*</span></label>
+        <div class="opts grid-opts" data-min="1" data-none="None of these">
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="Sudden or recently worsening sweating"><span>Sudden / worsening sweating</span></label>
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="Generalised whole-body sweating"><span>Whole-body sweating</span></label>
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="Night sweats"><span>Night sweats</span></label>
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="Unexplained weight loss"><span>Unexplained weight loss</span></label>
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="Palpitations or tremors"><span>Palpitations / tremors</span></label>
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="Thyroid problems"><span>Thyroid problems</span></label>
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="Diabetes or blood-sugar problems"><span>Diabetes / blood-sugar problems</span></label>
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="Menopausal symptoms"><span>Menopausal symptoms</span></label>
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="Sweating that began after a medication change"><span>Sweating began after a medication change</span></label>
+          <label class="opt"><input type="checkbox" name="Sweating red flags" value="None of these"><span>None of these</span></label>
+        </div><div class="err-msg">Please make a selection.</div></div>
+      <p style="font-size:12.5px;color:var(--muted);margin:-2px 0 2px 2px">Some excess sweating has an underlying medical cause that should be investigated rather than treated. We may ask you to see your GP first.</p>
+    </div>
+
+    <!-- 6c · Nefertiti / neck screening -->
+    <div class="card" data-cond="nefertiti">
+      <div class="sec-h"><span class="sec-n">6</span><h2 class="sec-t">Neck (Nefertiti) screening</h2></div>
+      <div class="sec-d">Shown because you selected the Nefertiti lift.</div>
+      <div class="f" data-group><label class="q">Do you have any of the following? <span class="req">*</span></label>
+        <div class="opts grid-opts" data-min="1" data-none="None of these">
+          <label class="opt"><input type="checkbox" name="Neck screening" value="Previous neck surgery or significant neck injury"><span>Previous neck surgery / injury</span></label>
+          <label class="opt"><input type="checkbox" name="Neck screening" value="Existing neck weakness"><span>Existing neck weakness</span></label>
+          <label class="opt"><input type="checkbox" name="Neck screening" value="Difficulty swallowing or frequent choking"><span>Difficulty swallowing / choking</span></label>
+          <label class="opt"><input type="checkbox" name="Neck screening" value="Voice or speech problems"><span>Voice / speech problems</span></label>
+          <label class="opt"><input type="checkbox" name="Neck screening" value="Significant breathing problems"><span>Significant breathing problems</span></label>
+          <label class="opt"><input type="checkbox" name="Neck screening" value="Lower-lip or smile asymmetry"><span>Lower-lip / smile asymmetry</span></label>
+          <label class="opt"><input type="checkbox" name="Neck screening" value="None of these"><span>None of these</span></label>
+        </div><div class="err-msg">Please make a selection.</div></div>
+    </div>
+
+    <!-- 6d · Tinkerbell / nose screening -->
+    <div class="card" data-cond="tinkerbell">
+      <div class="sec-h"><span class="sec-n">6</span><h2 class="sec-t">Nose (Tinkerbell) screening</h2></div>
+      <div class="sec-d">Shown because you selected the Tinkerbell nose-tip treatment.</div>
+      <div class="f" data-group><label class="q">Do you have any of the following? <span class="req">*</span></label>
+        <div class="opts grid-opts" data-min="1" data-none="None of these">
+          <label class="opt"><input type="checkbox" name="Nose screening" value="Previous rhinoplasty or nasal surgery"><span>Previous rhinoplasty / nasal surgery</span></label>
+          <label class="opt"><input type="checkbox" name="Nose screening" value="Significant nasal trauma"><span>Significant nasal trauma</span></label>
+          <label class="opt"><input type="checkbox" name="Nose screening" value="Nasal implants, threads or filler"><span>Nasal implants / threads / filler</span></label>
+          <label class="opt"><input type="checkbox" name="Nose screening" value="Difficulty breathing through the nose"><span>Difficulty breathing through the nose</span></label>
+          <label class="opt"><input type="checkbox" name="Nose screening" value="Existing upper-lip or smile asymmetry"><span>Upper-lip / smile asymmetry</span></label>
+          <label class="opt"><input type="checkbox" name="Nose screening" value="None of these"><span>None of these</span></label>
+        </div><div class="err-msg">Please make a selection.</div></div>
+    </div>
+
+    <!-- ============================================================
+         7. ABOUT BOTULINUM TOXIN (understanding — must tick all)
+         ============================================================ -->
+    <div class="card">
+      <div class="sec-h"><span class="sec-n">7</span><h2 class="sec-t">Understanding the treatment</h2></div>
+      <div class="sec-d">Botulinum toxin type A temporarily relaxes the selected muscles, or — for sweating — temporarily reduces signals to the treated sweat glands. Please confirm you understand all of the following.</div>
+      <div class="f" data-group><div class="opts" data-all>
+        <label class="opt"><input type="checkbox" name="Understanding" value="Results are temporary and vary between individuals."><span>Results are <b>temporary</b> and vary between individuals.</span></label>
+        <label class="opt"><input type="checkbox" name="Understanding" value="A particular appearance or level of sweat reduction cannot be guaranteed."><span>A particular appearance / level of sweat reduction <b>cannot be guaranteed</b>.</span></label>
+        <label class="opt"><input type="checkbox" name="Understanding" value="Some movement, lines, jaw width or sweating may remain."><span>Some movement, lines, jaw width or sweating may remain.</span></label>
+        <label class="opt"><input type="checkbox" name="Understanding" value="More than one treatment or future maintenance may be required."><span>More than one treatment / future maintenance may be required.</span></label>
+        <label class="opt"><input type="checkbox" name="Understanding" value="Static lines, skin laxity, fat and bone structure may not be corrected."><span>Static lines, skin laxity, fat &amp; bone structure may not be corrected.</span></label>
+        <label class="opt"><input type="checkbox" name="Understanding" value="This treatment is not dermal filler and does not add volume."><span>This is <b>not dermal filler</b> and does not add volume.</span></label>
+        <label class="opt"><input type="checkbox" name="Understanding" value="The practitioner may lower the dose or refuse to treat an unsafe area."><span>The practitioner may lower the dose or decline to treat an unsafe area.</span></label>
+        <label class="opt"><input type="checkbox" name="Understanding" value="Botulinum toxin cannot be dissolved or removed after injection."><span>Botulinum toxin <b>cannot be dissolved or removed</b> after injection — any unwanted effect must wear off.</span></label>
+      </div><div class="err-msg">Please confirm all to proceed.</div></div>
+    </div>
+
+    <!-- ============================================================
+         8. LICENSED & OFF-LABEL USE
+         ============================================================ -->
+    <div class="card">
+      <div class="sec-h"><span class="sec-n">8</span><h2 class="sec-t">Licensed &amp; off-label use</h2></div>
+      <div class="sec-d">Some treatments (certain masseter, nasal-tip, sweating, neck or contouring techniques) may be outside a product's UK marketing authorisation. Please select the statement that applies to you.</div>
+      <div class="f" data-group><div class="opts" data-min="1" data-single>
+        <label class="opt"><input type="checkbox" name="Licensing status" value="My treatment is within the product's marketing authorisation."><span>My treatment is <b>within</b> the product's marketing authorisation.</span></label>
+        <label class="opt"><input type="checkbox" name="Licensing status" value="Part or all of my treatment is off-label, and the prescriber has explained this."><span>Part or all of my treatment is <b>off-label</b> — the prescriber has explained the reasons, evidence, benefits, alternatives and uncertainties.</span></label>
+      </div><div class="err-msg">Please choose one.</div></div>
+      <div class="f" data-group><div class="opts" data-min="1" data-single>
+        <label class="opt"><input type="checkbox" name="Licensing questions" value="I have had the opportunity to ask questions about the licensing status of my treatment."><span>I have had the opportunity to ask questions about the licensing status of my treatment.</span></label>
+      </div><div class="err-msg">Please confirm to continue.</div></div>
+    </div>
+
+    <!-- ============================================================
+         9. GENERAL RISKS & SIDE EFFECTS (always shown)
+         ============================================================ -->
     <div class="card prose">
-      <div class="sec-h"><span class="sec-n">8</span><h2 class="sec-t">Risks &amp; potential side effects</h2></div>
-      <p>I understand that possible side effects include:</p>
+      <div class="sec-h"><span class="sec-n">9</span><h2 class="sec-t">General risks &amp; possible side effects</h2></div>
+      <p>I understand that possible side effects and complications include:</p>
       <div class="cols">
-        <div class="mini ok"><h4>Common</h4><ul>
-          <li>Redness</li><li>Swelling</li><li>Tenderness</li><li>Bruising</li><li>Mild headache</li>
-          <li>Temporary heaviness</li><li>Injection-site discomfort</li></ul></div>
-        <div class="mini avoid"><h4>Less common</h4><ul>
-          <li>Eyelid drooping (ptosis)</li><li>Brow heaviness</li><li>Uneven results</li><li>Double vision</li>
-          <li>Dry eyes</li><li>Excess tearing</li><li>Facial asymmetry</li><li>Difficulty with certain expressions</li></ul></div>
+        <div class="mini ok"><h4>Common / temporary</h4><ul>
+          <li>Pain, stinging or discomfort</li><li>Redness, swelling, tenderness, itching</li><li>Bleeding, bruising or a small lump</li>
+          <li>Headache</li><li>Dizziness, nausea, anxiety or fainting</li><li>Temporary numbness or altered sensation</li>
+          <li>Flu-like symptoms</li><li>Local infection</li><li>Temporary muscle weakness</li>
+          <li>Uneven, insufficient or excessive effect</li><li>Under- or over-correction</li><li>Asymmetry / altered expression</li>
+          <li>Reduced response to future treatments</li></ul></div>
+        <div class="mini avoid"><h4>Upper-face specific</h4><ul>
+          <li>Heavy forehead or eyebrows</li><li>Eyebrow asymmetry or exaggerated arch</li><li>Drooping eyebrow or eyelid</li>
+          <li>Puffy eyelids</li><li>Dry, irritated or watery eyes</li><li>Difficulty fully closing an eye</li>
+          <li>Blurred or double vision</li><li>Changes to the smile / expression</li></ul></div>
       </div>
-      <div class="mini avoid"><h4>Rare</h4><ul>
-        <li>Allergic reaction</li><li>Infection</li><li>Muscle weakness outside the intended area</li>
-        <li>Difficulty swallowing</li><li>Difficulty speaking</li><li>Difficulty breathing</li><li>Anaphylaxis</li></ul></div>
-      <p>I understand that, although uncommon, serious complications may require urgent medical treatment.</p>
+      <div class="mini avoid"><h4>Rare but potentially serious</h4><ul>
+        <li>Severe allergic reaction / anaphylaxis</li><li>Generalised or excessive muscle weakness</li><li>Spread of toxin effects away from the injection area</li>
+        <li>Difficulty speaking or slurred speech</li><li>Difficulty swallowing or choking</li><li>Difficulty breathing</li>
+        <li>Aspiration or aspiration pneumonia</li><li>Symptoms of botulism</li><li>A reaction requiring urgent hospital treatment</li></ul></div>
       <div class="f" data-group><div class="opts" data-min="1" data-single>
-        <label class="opt"><input type="checkbox" name="Risks acknowledgement" value="I have read, understood and accept all the common, less common and rare risks and side effects listed above, and still wish to proceed."><span>I have read, understood and <b>accept all the risks and side effects</b> (common, less common and rare) listed above, and still wish to proceed.</span></label>
+        <label class="opt"><input type="checkbox" name="General risks acknowledgement" value="I have read, understood and accept all the common, less common and rare risks listed above, and still wish to proceed."><span>I have read, understood and <b>accept all the risks and side effects</b> (common, less common and rare) above, and still wish to proceed.</span></label>
       </div><div class="err-msg">Please confirm to continue.</div></div>
     </div>
 
-    <!-- PREGNANCY -->
-    <div class="card">
-      <div class="sec-h"><span class="sec-n">9</span><h2 class="sec-t">Pregnancy &amp; breastfeeding declaration</h2></div>
-      <div class="f" data-group><label class="q">Please confirm all of the following <span class="req">*</span></label>
-        <div class="opts" data-all>
-          <label class="opt"><input type="checkbox" name="Pregnancy declaration" value="I am not pregnant."><span>I am not pregnant.</span></label>
-          <label class="opt"><input type="checkbox" name="Pregnancy declaration" value="I am not trying to become pregnant."><span>I am not trying to become pregnant.</span></label>
-          <label class="opt"><input type="checkbox" name="Pregnancy declaration" value="I am not breastfeeding."><span>I am not breastfeeding.</span></label>
-        </div><div class="err-msg">Please confirm all three to proceed.</div></div>
-      <p style="font-size:13px;color:var(--muted);margin:0 0 0 2px">I understand treatment cannot be performed during pregnancy or breastfeeding.</p>
+    <!-- ============================================================
+         10. TREATMENT-SPECIFIC RISKS  (CONDITIONAL)
+         ============================================================ -->
+
+    <!-- 10a · Upper-face specific risk acknowledgement -->
+    <div class="card" data-cond="upperface">
+      <div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Upper-face treatment — specific risks</h2></div>
+      <div class="sec-d">Shown because you selected a frown / forehead / crow's feet treatment.</div>
+      <p class="prose" style="margin-top:0">Possible effects include heavy or lowered brows, drooping eyelid, uneven brows, reduced forehead movement, altered smile or eye shape, dry/watery eyes, headache, persistence of deeper lines at rest, and uneven results where muscles were already asymmetrical.</p>
+      <div class="f" data-group><div class="opts" data-all>
+        <label class="opt"><input type="checkbox" name="Upper-face risk acknowledgement" value="I understand and accept the specific risks of upper-face treatment."><span>I understand and <b>accept the specific risks</b> of upper-face treatment.</span></label>
+        <label class="opt"><input type="checkbox" name="Upper-face balance acknowledgement" value="I understand forehead treatment may need to be balanced with the glabella to avoid a heavy result."><span>I understand forehead treatment may need to be balanced with the frown area to avoid a heavy result.</span></label>
+      </div><div class="err-msg">Please confirm all to proceed.</div></div>
     </div>
 
-    <!-- PHOTOGRAPHY -->
-    <div class="card">
-      <div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Photography consent</h2></div>
-      <div class="f" data-group><label class="q">Please select all that apply <span class="req">*</span></label>
-        <div class="opts" data-min="1">
-          <label class="opt"><input type="checkbox" name="Photography consent" value="Medical records only"><span>Medical records only</span></label>
-          <label class="opt"><input type="checkbox" name="Photography consent" value="Practitioner training"><span>Practitioner training</span></label>
-          <label class="opt"><input type="checkbox" name="Photography consent" value="Educational presentations"><span>Educational presentations</span></label>
-          <label class="opt"><input type="checkbox" name="Photography consent" value="Marketing & social media"><span>Marketing &amp; social media</span></label>
-          <label class="opt"><input type="checkbox" name="Photography consent" value="Before-and-after comparisons"><span>Before-and-after comparisons</span></label>
-          <label class="opt"><input type="checkbox" name="Photography consent" value="I do not consent to marketing use"><span>I do not consent to marketing use</span></label>
-        </div><div class="err-msg">Please tick at least one.</div></div>
+    <!-- 10b · Masseter specific risks -->
+    <div class="card" data-cond="masseter">
+      <div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Masseter treatment — specific risks</h2></div>
+      <p class="prose" style="margin-top:0">Possible effects include temporary chewing weakness or fatigue, difficulty with hard/chewy foods, changes in bite sensation, jaw discomfort, uneven jaw-width reduction, smile/lip asymmetry, temporary weakness of nearby muscles, an unwanted change in facial shape, increased jowls or lower-face laxity, hollowing, paradoxical masseter bulging, and partial or insufficient improvement.</p>
+      <div class="f" data-group><div class="opts" data-all>
+        <label class="opt"><input type="checkbox" name="Masseter risk acknowledgement" value="I understand and accept the specific risks of masseter treatment."><span>I understand and <b>accept the specific risks</b> of masseter treatment.</span></label>
+        <label class="opt"><input type="checkbox" name="Masseter dental acknowledgement" value="I understand this does not replace dental investigation of an underlying bite, tooth or jaw-joint problem."><span>I understand this does <b>not replace dental investigation</b> of an underlying bite, tooth or jaw-joint problem.</span></label>
+      </div><div class="err-msg">Please confirm all to proceed.</div></div>
     </div>
 
-    <!-- GDPR -->
-    <div class="card prose">
-      <div class="sec-h"><span class="sec-n">11</span><h2 class="sec-t">Data protection &amp; GDPR</h2></div>
-      <p>I consent to Layali Clinic storing my personal information, medical history and treatment records for clinical, legal and insurance purposes.</p>
+    <!-- 10c · Hyperhidrosis specific risks -->
+    <div class="card" data-cond="hyperhidrosis">
+      <div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Excess sweating treatment — specific risks</h2></div>
+      <p class="prose" style="margin-top:0">Possible effects include pain from multiple injections, bruising/swelling/irritation, incomplete or uneven reduction in sweating, dryness or irritation, altered skin odour, increased sweating in untreated areas, temporary weakness of the hand/arm/foot (where treated), temporary difficulty gripping or fine movement after palm treatment, reduced response to later treatments, and continued sweating caused by an underlying condition.</p>
       <div class="f" data-group><div class="opts" data-min="1" data-single>
-        <label class="opt"><input type="checkbox" name="GDPR consent" value="I understand and consent to Layali Clinic storing my information as described, and I have read the Privacy Notice."><span>I understand and consent — I have also read the <a href="privacy.html" target="_blank">Privacy Notice</a>.</span></label>
+        <label class="opt"><input type="checkbox" name="Hyperhidrosis risk acknowledgement" value="I understand and accept the specific risks of excess-sweating treatment."><span>I understand and <b>accept the specific risks</b> of excess-sweating treatment.</span></label>
       </div><div class="err-msg">Please confirm to continue.</div></div>
     </div>
 
-    <!-- AFTERCARE -->
+    <!-- 10d · Nefertiti specific risks -->
+    <div class="card" data-cond="nefertiti">
+      <div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Nefertiti lift — specific risks</h2></div>
+      <p class="prose" style="margin-top:0">Possible effects include neck weakness or discomfort, difficulty lifting/controlling the lower lip, uneven smile or lower-face asymmetry, facial weakness, difficulty swallowing, voice/speech changes, difficulty controlling neck movement, an uneven jawline, limited improvement where the concern is mainly fat/loose skin/bone, and increased visibility of untreated bands.</p>
+      <div class="f" data-group><div class="opts" data-min="1" data-single>
+        <label class="opt"><input type="checkbox" name="Nefertiti risk acknowledgement" value="I understand and accept the specific risks of the Nefertiti lift."><span>I understand and <b>accept the specific risks</b> of the Nefertiti lift.</span></label>
+      </div><div class="err-msg">Please confirm to continue.</div></div>
+    </div>
+
+    <!-- 10e · Tinkerbell specific risks -->
+    <div class="card" data-cond="tinkerbell">
+      <div class="sec-h"><span class="sec-n">10</span><h2 class="sec-t">Tinkerbell nose — specific risks</h2></div>
+      <p class="prose" style="margin-top:0">Possible effects include limited or no visible improvement, uneven nasal-tip movement, an asymmetrical appearance, an over- or under-elevated tip, temporary weakness flaring the nostrils, changes in upper-lip movement, smile asymmetry, and weakness of nearby facial muscles.</p>
+      <div class="f" data-group><div class="opts" data-all>
+        <label class="opt"><input type="checkbox" name="Tinkerbell risk acknowledgement" value="I understand and accept the specific risks of nasal-tip treatment."><span>I understand and <b>accept the specific risks</b> of nasal-tip treatment.</span></label>
+        <label class="opt"><input type="checkbox" name="Tinkerbell structural acknowledgement" value="I understand this cannot correct structural breathing problems or concerns needing surgical assessment."><span>I understand this <b>cannot correct structural breathing problems</b> or concerns needing surgical assessment.</span></label>
+      </div><div class="err-msg">Please confirm all to proceed.</div></div>
+    </div>
+
+    <!-- ============================================================
+         11. ALTERNATIVES
+         ============================================================ -->
     <div class="card">
-      <div class="sec-h"><span class="sec-n">12</span><h2 class="sec-t">Aftercare confirmation</h2></div>
+      <div class="sec-h"><span class="sec-n">11</span><h2 class="sec-t">Alternatives</h2></div>
+      <div class="sec-d">Reasonable alternatives have been discussed, which may include: no treatment; taking more time to decide; skincare or prescription skin treatment; clinical-strength antiperspirants; medical investigation for sweating; dental assessment for grinding/jaw pain; other injectable or non-injectable treatments; or surgical assessment where appropriate.</div>
+      <div class="f" data-group><div class="opts" data-min="1" data-single>
+        <label class="opt"><input type="checkbox" name="Alternatives acknowledgement" value="I understand that choosing not to proceed is a reasonable option."><span>I understand that <b>choosing not to proceed</b> is a reasonable option.</span></label>
+      </div><div class="err-msg">Please confirm to continue.</div></div>
+    </div>
+
+    <!-- ============================================================
+         12. PHOTOGRAPHY CONSENT
+         ============================================================ -->
+    <div class="card">
+      <div class="sec-h"><span class="sec-n">12</span><h2 class="sec-t">Photography consent</h2></div>
+      <div class="f" data-group><label class="q">Confidential clinical photographs <span class="req">*</span></label>
+        <div class="opts" data-min="1" data-single>
+          <label class="opt"><input type="checkbox" name="Clinical photography consent" value="I consent to before/after photos for confidential medical records and treatment planning."><span>I consent to before/after photos for <b>confidential medical records</b> &amp; treatment planning (not published without separate permission).</span></label>
+        </div><div class="err-msg">Please confirm to continue.</div></div>
+      <div class="f" data-group><label class="q">Optional marketing permission <span class="req">*</span><div class="hint">Refusing will not affect your treatment.</div></label>
+        <div class="opts" data-min="1" data-single>
+          <label class="opt"><input type="checkbox" name="Marketing photography consent" value="I give permission for identifiable photos/videos in marketing & educational materials."><span>Yes — you may use <b>identifiable</b> photos/videos in marketing &amp; educational materials.</span></label>
+          <label class="opt"><input type="checkbox" name="Marketing photography consent" value="I give permission only if my identity is concealed."><span>Only if my <b>identity is concealed</b>.</span></label>
+          <label class="opt"><input type="checkbox" name="Marketing photography consent" value="I do not give permission for marketing use."><span><b>No</b> — I do not give permission for marketing use.</span></label>
+        </div><div class="err-msg">Please choose one.</div></div>
+      <div class="f"><label class="q">Any specific restrictions?</label><input type="text" name="Photography restrictions"></div>
+    </div>
+
+    <!-- ============================================================
+         13. AFTERCARE & EMERGENCY INFORMATION
+         ============================================================ -->
+    <div class="card">
+      <div class="sec-h"><span class="sec-n">13</span><h2 class="sec-t">Aftercare &amp; emergency information</h2></div>
       <div class="f" data-group><label class="q">I confirm that <span class="req">*</span></label>
         <div class="opts" data-all>
-          <label class="opt"><input type="checkbox" name="Aftercare confirmation" value="I have received aftercare instructions."><span>I have received aftercare instructions.</span></label>
-          <label class="opt"><input type="checkbox" name="Aftercare confirmation" value="I understand the aftercare requirements."><span>I understand the aftercare requirements.</span></label>
-          <label class="opt"><input type="checkbox" name="Aftercare confirmation" value="I understand how to contact the clinic if I have concerns."><span>I understand how to contact the clinic if I have concerns.</span></label>
+          <label class="opt"><input type="checkbox" name="Aftercare confirmation" value="I have received or will receive written aftercare instructions."><span>I have received / will receive written aftercare instructions.</span></label>
+          <label class="opt"><input type="checkbox" name="Aftercare confirmation" value="I agree to follow the aftercare advice provided."><span>I agree to follow the aftercare advice provided.</span></label>
+          <label class="opt"><input type="checkbox" name="Aftercare confirmation" value="I will contact the clinic promptly about any unexpected result, weakness, infection or concern."><span>I will contact the clinic promptly about any unexpected result, weakness, infection or concern.</span></label>
+          <label class="opt"><input type="checkbox" name="Aftercare confirmation" value="I understand corrective treatment is only provided where clinically appropriate."><span>I understand corrective treatment is only provided where clinically appropriate.</span></label>
         </div><div class="err-msg">Please confirm all to proceed.</div></div>
+      <div class="notice" style="margin-top:6px"><b>Seek urgent medical help</b> if you have difficulty swallowing, slurred speech, breathing difficulty or widespread muscle weakness after treatment — these can develop hours to weeks later.<br>
+        Clinic: <b>07787&nbsp;708200</b> &nbsp;·&nbsp; Out-of-hours: <b>NHS&nbsp;111</b> &nbsp;·&nbsp; Emergency: <b>999</b></div>
     </div>
 
-    <!-- CONSENT TO TREATMENT -->
+    <!-- ============================================================
+         14. CLIENT CONSENT DECLARATION + SIGNATURE
+         ============================================================ -->
     <div class="card">
-      <div class="sec-h"><span class="sec-n">13</span><h2 class="sec-t">Consent to treatment</h2></div>
-      <div class="f" data-group><label class="q">I confirm that <span class="req">*</span></label>
+      <div class="sec-h"><span class="sec-n">14</span><h2 class="sec-t">Your consent declaration</h2></div>
+      <div class="f" data-group><label class="q">Please confirm every statement <span class="req">*</span></label>
         <div class="opts" data-all>
-          <label class="opt"><input type="checkbox" name="Consent to treatment" value="I have had the opportunity to ask questions."><span>I have had the opportunity to ask questions.</span></label>
-          <label class="opt"><input type="checkbox" name="Consent to treatment" value="My questions have been answered satisfactorily."><span>My questions have been answered satisfactorily.</span></label>
-          <label class="opt"><input type="checkbox" name="Consent to treatment" value="I understand the risks, benefits and alternatives."><span>I understand the risks, benefits and alternatives.</span></label>
-          <label class="opt"><input type="checkbox" name="Consent to treatment" value="I understand that no guarantee of outcome can be given."><span>I understand that no guarantee of outcome can be given.</span></label>
-          <label class="opt"><input type="checkbox" name="Consent to treatment" value="I understand treatment is elective."><span>I understand treatment is elective.</span></label>
-          <label class="opt"><input type="checkbox" name="Consent to treatment" value="I consent voluntarily to treatment today."><span>I consent voluntarily to treatment today.</span></label>
-        </div><div class="err-msg">Please confirm all to proceed.</div></div>
-    </div>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="I have read and understood this consent form."><span>I have read and understood this consent form.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="The information I have provided is complete and accurate."><span>The information I have provided is complete and accurate.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="I will inform the practitioner of any change to my health, medication, pregnancy status or history before treatment."><span>I will inform the practitioner of any change to my health, medication, pregnancy status or history before treatment.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="I have explained my desired outcome and understand the realistic limitations."><span>I have explained my desired outcome and understand the realistic limitations.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="The treatment, product, benefits, risks, alternatives and expected outcome have been explained to me."><span>The treatment, product, benefits, risks, alternatives &amp; expected outcome have been explained to me.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="No specific result, degree of improvement or duration has been guaranteed."><span>No specific result, degree of improvement or duration has been guaranteed.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="Side effects can occur even if I have previously had botulinum toxin without complications."><span>Side effects can occur even if I've previously had botulinum toxin without complications.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="I have had sufficient opportunity to ask questions and they have been answered."><span>I have had sufficient opportunity to ask questions and they have been answered.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="I have not been pressured or influenced into having treatment."><span>I have not been pressured or influenced into having treatment.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="I may withdraw consent at any time before the injections are administered."><span>I may withdraw consent at any time before the injections are administered.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="I understand botulinum toxin cannot be removed or dissolved after injection."><span>I understand botulinum toxin cannot be removed or dissolved after injection.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="I consent to botulinum toxin type A in the areas selected and agreed at my consultation."><span>I <b>consent to botulinum toxin type A</b> in the areas selected and agreed at my consultation.</span></label>
+          <label class="opt"><input type="checkbox" name="Consent declaration" value="This consent applies to today's treatment only and does not authorise future treatments."><span>This consent applies to <b>today's treatment only</b> and does not authorise future treatments.</span></label>
+        </div><div class="err-msg">Please confirm all statements to proceed.</div></div>
 
-    <!-- PATIENT DECLARATION -->
-    <div class="card prose">
-      <div class="sec-h"><span class="sec-n">14</span><h2 class="sec-t">Patient declaration</h2></div>
-      <p>I certify that the information I have provided is true and complete to the best of my knowledge. I understand the information provided in this form and consent to treatment.</p>
-      <div class="f" data-group><div class="opts" data-min="1" data-single>
-        <label class="opt"><input type="checkbox" name="Final declaration" value="I certify the information provided is true and complete, and I consent to treatment."><span>I certify the information I've provided is true and complete, and I <b>consent to treatment</b>.</span></label>
-      </div><div class="err-msg">Please confirm to continue.</div></div>
-      <div class="f"><label class="q">Patient name (print) <span class="req">*</span></label><input type="text" name="Patient name printed" required></div>
-      <div class="f" data-group id="sigField"><label class="q">Patient signature <span class="req">*</span><div class="hint">Sign with your finger or mouse.</div></label>
+      <div class="f"><label class="q">Your full name (print) <span class="req">*</span></label><input type="text" name="Printed name" required></div>
+      <div class="f" data-group id="sigField"><label class="q">Your signature <span class="req">*</span><div class="hint">Sign with your finger or mouse.</div></label>
         <div class="sigwrap"><canvas class="sig"></canvas><div class="sig-base"></div><button type="button" class="sig-clear" id="sigClear">Clear</button></div>
         <div class="err-msg">Please add your signature.</div></div>
       <div class="f"><label class="q">Date <span class="req">*</span></label><input type="date" name="Date signed" required></div>
@@ -244,9 +476,62 @@
     <p class="foot">A full copy of this signed form is saved to your Layali Clinic record. · <a href="privacy.html">Privacy Notice</a></p>
   </form>
 
+  <!-- Shown after a successful submit (pack.js swaps this in) -->
   <div class="done" id="doneScreen"><div class="tick">&check;</div><h2>Thank you</h2>
-    <p>Your signed consultation &amp; consent form has been received by Layali Clinic and saved to your record. If anything about your health changes before your appointment, please call us on 07787 708200.</p></div>
+    <p>Your signed consent form has been received by Layali Clinic and saved to your record. If anything about your health changes before your appointment, please call us on 07787 708200.</p></div>
   <p class="foot">Layali Clinic · 442 Lea Bridge Road, Leyton, London, E10 7DT · 07787 708200 · info.lushlips@gmail.com · <a href="privacy.html">Privacy Notice</a></p>
 </div>
+
+<!-- The shared engine: validation, signature, PDF, submit to Google -->
 <script src="pack.js?v=topl"></script>
+
+<!-- ============================================================
+     CONDITIONAL SECTIONS (page-specific, self-contained)
+     Shows/hides the treatment-specific cards by ADDING or REMOVING
+     them from the page, so the shared engine only ever validates,
+     signs and PDF-saves the sections relevant to THIS client.
+     ============================================================ -->
+<script>
+(function () {
+  function init() {
+    var form = document.querySelector('form[data-pack-form]');
+    if (!form) return;
+
+    // Find every conditional card and detach it, leaving a tiny
+    // placeholder comment behind to mark where it should go back.
+    var conds = [];
+    form.querySelectorAll('[data-cond]').forEach(function (node) {
+      var ph = document.createComment('cond-anchor:' + node.getAttribute('data-cond'));
+      node.parentNode.insertBefore(ph, node);
+      conds.push({ key: node.getAttribute('data-cond'), node: node, ph: ph, inDom: true });
+    });
+
+    // Which treatment keys are currently ticked in Section 2?
+    function activeKeys() {
+      var set = {};
+      form.querySelectorAll('input[data-trigger]:checked').forEach(function (i) {
+        i.getAttribute('data-trigger').split(',').forEach(function (k) { set[k.trim()] = true; });
+      });
+      return set;
+    }
+
+    // Add cards whose key is active; remove cards whose key is not.
+    function recompute() {
+      var act = activeKeys();
+      conds.forEach(function (c) {
+        var want = !!act[c.key];
+        if (want && !c.inDom) { c.ph.parentNode.insertBefore(c.node, c.ph.nextSibling); c.inDom = true; }
+        else if (!want && c.inDom) { if (c.node.parentNode) c.node.parentNode.removeChild(c.node); c.inDom = false; }
+      });
+    }
+
+    recompute(); // start with everything treatment-specific hidden
+    form.addEventListener('change', function (e) {
+      if (e.target && e.target.matches && e.target.matches('input[data-trigger]')) recompute();
+    });
+  }
+  if (document.readyState !== 'loading') init();
+  else document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
 </body></html>
